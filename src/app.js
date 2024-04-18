@@ -4,7 +4,8 @@ const passport = require("passport");
 const path = require("path");
 const cookieSession = require("cookie-session");
 const flash = require('connect-flash');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const fileUpload = require('express-fileupload');
 require("dotenv").config();
 
 const mainRouter = require("./routes/main.router");
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use(fileUpload())
 app.use(methodOverride('_method'));
 
 // req.body 사용 가능 미들웨어
