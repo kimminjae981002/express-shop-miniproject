@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const path = require("path");
 const cookieSession = require("cookie-session");
+const flash = require('connect-flash');
 require("dotenv").config();
 
 const mainRouter = require("./routes/main.router");
@@ -36,6 +37,17 @@ app.use(function (request, response, next) {
   }
   next();
 });
+
+// connect-flash 미들웨어
+app.use(flash());
+
+// ejs 폴더 안에서 변수로 사용 가능 
+app.use((req, res, next) => {
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  res.locals.currentUser = req.user;
+  next()
+})
 
 // passport 미들웨어
 app.use(passport.initialize());
