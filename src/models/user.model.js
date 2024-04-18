@@ -6,11 +6,13 @@ const userSchema = mongoose.Schema({
     type: String,
     unique: true,
     trim: true,
+    required: true,
   },
   password: {
     type: String,
-    minLength: 5,
+    minLength: 4,
   },
+  //sparse 있어도 되고 없어도 된다.
   googleId: {
     type: String,
     unique: true,
@@ -21,6 +23,16 @@ const userSchema = mongoose.Schema({
     unique: true,
     sparse: true,
   },
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  // 1이면 admin 일반 유저는 0
+  admin: {
+    type: Number,
+    default: 0,
+  }
 });
 // userSchema라는 변수에 mongoose Schema를 생성한다.
 
