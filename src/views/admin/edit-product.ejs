@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h2> 상품 수정하기</h2>
+    <a href="/admin/products" class="btn btn-primary">뒤로</a>
+</div>
+
+<p>갤러리(세부 이미지들)</p>
+<div class="gallery row">
+    <% galleryImages.forEach(image => { %>
+        <% if (image !== 'thumbs') { %>
+        <div class="col">
+            <form action="/admin/products/<%= id %>/image/<%= image %>?_method=DELETE" method="POST">
+                <button type="submit">
+                    <img src="/products-images/<%= id %>/gallery/thumbs/<%= image %>" alt="">
+                </button>
+            </form>
+        </div>
+        <% } %>
+    <% }) %>
+</div>
+<br>
+
+<!-- 이미지를 드래그 해서 올릴 수 있다. -->
+<form enctype="multipart/form-data" method="post" action="/admin/products/product-gallery/<%= id %>" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="upload">
+    </div>
+</form>
+
+
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
+<!-- 이미지를 올리면 바로 올라간다. -->
+<script>
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*", // 이미지만 올릴 수 있게.
+        init: function() { // 1초 뒤에 새로고침된다.
+            this.on("queuecomplete", file => {
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            });
+        }
+    }
+</script>
+
+<%- include('../partials/footer') %>

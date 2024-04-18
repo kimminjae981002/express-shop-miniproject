@@ -11,7 +11,7 @@ require("dotenv").config();
 const mainRouter = require("./routes/main.router");
 const usersRouter = require("./routes/user.router");
 const adminCategoriesRouter = require('./routes/admin-categories.router')
-const adminProductsRouter = require('./routes/admin.products.router')
+const adminProductsRouter = require('./routes/admin-products.router')
 const cartRouter = require('./routes/cart.router')
 const productsRouter = require('./routes/products.router')
 
