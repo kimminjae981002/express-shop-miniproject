@@ -126,4 +126,22 @@ router.post('/product-gallery/:id', checkAdmin, async (req, res, next) => {
     }
 })
 
+// 상품 이미지 삭제
+router.delete('/:id/image/:imageId', checkAdmin, async (req, res, next) => {
+    const originalImage = 'src/public/products-images/' + req.params.id + '/gallery/' + req.params.imageId;
+    const thumbImage = 'src/public/products-images/' + req.params.id + '/gallery/thumbs/' + req.params.imageId;
+
+    try {
+        console.log(originalImage)
+        await fs.remove(originalImage); // 이미지 삭제
+        await fs.remove(thumbImage);
+
+        req.flash('success', '이미지 삭제')
+        res.redirect('/admin/products/' + req.params.id + '/edit')
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+})
+
 module.exports = router
