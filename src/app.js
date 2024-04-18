@@ -7,6 +7,11 @@ require("dotenv").config();
 
 const mainRouter = require("./routes/main.router");
 const usersRouter = require("./routes/user.router");
+const adminCategoriesRouter = require('./routes/admin-categories.router')
+const adminProductsRouter = require('./routes/admin.products.router')
+const cartRouter = require('./routes/cart.router')
+const productsRouter = require('./routes/products.router')
+
 
 const app = express();
 
@@ -53,7 +58,11 @@ mongoose
   });
 
 app.use("/", mainRouter);
-app.use("/", usersRouter);
+app.use("/auth", usersRouter);
+app.use('/admin/categories', adminCategoriesRouter)
+app.use('/admin/products', adminProductsRouter)
+app.use('/products', productsRouter)
+app.use('/cart', cartRouter)
 
 app.listen("3000", (req, res) => {
   console.log("listening 3000");
