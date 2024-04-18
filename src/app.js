@@ -79,6 +79,12 @@ app.use('/admin/products', adminProductsRouter)
 app.use('/products', productsRouter)
 app.use('/cart', cartRouter)
 
+// 서버 종료 시키지 않기 위해 에러 체크
+app.use((err, req, rex, next) => {
+  res.status(err.status || 500);
+  res.send(err.message || '에러 발생')
+})
+
 app.listen("3000", (req, res) => {
   console.log("listening 3000");
 });

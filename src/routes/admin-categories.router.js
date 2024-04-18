@@ -11,7 +11,9 @@ router.post('/add-category', checkAdmin, async (req, res) => {
     try {
         const title = req.body.title;
         const slug = title.replace(/\s+/g, '-').toLowerCase();
+        // 제목 입니다. 제목-입니다. 로 만들어준다.
         const category = await Category.findOne({ slug: slug });
+        // slug에 같은 title + slug가 있는지 찾는다.
         if (category) {
             req.flash('error', '이미 존재하는 카테고리입니다.');
             res.redirect('back');
