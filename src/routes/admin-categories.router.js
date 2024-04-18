@@ -34,6 +34,16 @@ router.post('/add-category', checkAdmin, async (req, res) => {
     }
 })
 
+router.get('/', checkAdmin, async (req, res) => {
+    try {
+        const categories = await Category.find();
+        res.render('admin/categories', { categories: categories });
+    } catch {
+        console.error(error);
+        next(error);
+    }
+})
+
 
 
 module.exports = router

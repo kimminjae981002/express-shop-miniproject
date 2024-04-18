@@ -80,7 +80,7 @@ app.use('/products', productsRouter)
 app.use('/cart', cartRouter)
 
 // 서버 종료 시키지 않기 위해 에러 체크
-app.use((err, req, rex, next) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send(err.message || '에러 발생')
 })
