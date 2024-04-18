@@ -14,7 +14,7 @@ mainRouter.get("/login", checkNotAuthenticated, (req, res) => {
 });
 
 mainRouter.get("/signup", checkNotAuthenticated, (req, res) => {
-  res.render("atuh/signup");
+  res.render("auth/signup");
 });
 
 module.exports = mainRouter;

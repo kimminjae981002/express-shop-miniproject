@@ -37,14 +37,17 @@ app.use(function (request, response, next) {
   next();
 });
 
+// passport 미들웨어
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport");
 
+// req.body 사용 가능 미들웨어
 app.use(express.json());
+// 정적 폴더 미들웨어
 app.use(express.urlencoded({ extended: false }));
-app.use("/static", express.static(path.join(__dirname, "public")));
-
+app.use(express.static(path.join(__dirname, "public")));
+// ejs 미들웨어
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
