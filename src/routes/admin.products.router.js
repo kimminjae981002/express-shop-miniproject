@@ -52,4 +52,14 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.get('/', async (req, res, next) => {
+    try {
+        const products = await Product.find();
+        res.render('admin/products',{products})
+    } catch (err) {
+        console.error(err);
+        next(err)
+    }
+})
+
 module.exports = router
