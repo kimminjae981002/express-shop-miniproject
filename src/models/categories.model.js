@@ -9,3 +9,7 @@ const categorySchema = mongoose.Schema({
         type: String,
     }
 })
+
+const category = mongoose.model("Category",categorySchema) 
+
+module.exports = category;

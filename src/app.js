@@ -41,6 +41,11 @@ app.use(function (request, response, next) {
 // connect-flash 미들웨어
 app.use(flash());
 
+// passport 미들웨어
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/passport");
+
 // ejs 폴더 안에서 변수로 사용 가능 
 app.use((req, res, next) => {
   res.locals.error = req.flash('error');
@@ -48,11 +53,6 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next()
 })
-
-// passport 미들웨어
-app.use(passport.initialize());
-app.use(passport.session());
-require("./config/passport");
 
 // req.body 사용 가능 미들웨어
 app.use(express.json());
