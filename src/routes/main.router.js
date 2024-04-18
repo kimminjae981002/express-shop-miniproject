@@ -5,16 +5,16 @@ const {
 } = require("../middlewares/auth");
 const mainRouter = express.Router();
 
-mainRouter.get("/", checkAuthenticated, (req, res, next) => {
-  res.render("index");
+mainRouter.get("/", (req, res, next) => {
+  res.redirect('/products')
 });
 
 mainRouter.get("/login", checkNotAuthenticated, (req, res) => {
-  res.render("login");
+  res.render("auth/login");
 });
 
 mainRouter.get("/signup", checkNotAuthenticated, (req, res) => {
-  res.render("signup");
+  res.render("atuh/signup");
 });
 
 module.exports = mainRouter;
