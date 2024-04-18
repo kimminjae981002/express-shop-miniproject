@@ -27,7 +27,7 @@ usersRouter.post("/login", (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      res.redirect("/products");
     });
   })(req, res, next);
 });
@@ -65,7 +65,7 @@ usersRouter.get("/auth/google", passport.authenticate("google"));
 usersRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successReturnToOrRedirect: "/",
+    successReturnToOrRedirect: "/products",
     failureRedirect: "/login",
   })
 );
@@ -74,7 +74,7 @@ usersRouter.get("/auth/kakao", passport.authenticate("kakao"));
 usersRouter.get(
   "/auth/kakao/callback",
   passport.authenticate("kakao", {
-    successReturnToOrRedirect: "/",
+    successReturnToOrRedirect: "/products",
     failureRedirect: "/login",
   })
 );
