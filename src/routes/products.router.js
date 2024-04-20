@@ -7,7 +7,7 @@ const { getAllCategories } = require('../middlewares/products')
 router.get('/', getAllCategories, async (req, res, next) => {
     try {
         const products = await Product.find();
-        res.render('/products', {products})
+        res.render('products', {products})
     } catch (err) {
         console.error(err);
         next(err);
