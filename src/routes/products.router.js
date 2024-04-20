@@ -13,7 +13,6 @@ router.get('/', getAllCategories, async (req, res, next) => {
         console.error(err);
         next(err);
     }
-    res.render('products')
 });
 
 router.get('/:category', getAllCategories, async (req, res, next) => {

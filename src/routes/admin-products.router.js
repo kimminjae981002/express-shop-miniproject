@@ -90,8 +90,8 @@ router.get('/:id/edit', checkAdmin, async (req, res, next) => {
     try {
     const categories = await Category.find();
     const { _id, title, desc, category, price, image } = await Product.findById(req.params.id);
-
-    const galleryDir = 'src/public/products-images/' + _id + '/gallery';
+    const id = _id.toString();
+    const galleryDir = 'src/public/products-images/' + id + '/gallery';
 
     const galleryImages = await fs.readdir(galleryDir);
 
