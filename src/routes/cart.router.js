@@ -103,5 +103,11 @@ router.delete('/', async (req, res, next) => {
     }
 })
 
+// 결제 시 장바구니 제거
+router.get('/complete-order', async (req, res, next) => {
+    req.session.cart = [];
+    req.flash("결제가 완료되었습니다.");
+    res.sendStatus(200);
+});
 
 module.exports = router
