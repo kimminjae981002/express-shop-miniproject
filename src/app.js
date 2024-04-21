@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const path = require("path");
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
+const expressSession = require('express-session');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const fileUpload = require('express-fileupload');
@@ -18,27 +19,38 @@ const productsRouter = require('./routes/products.router')
 
 const app = express();
 
-app.use(
-  cookieSession({
-    name: "cookie-session",
-    keys: [process.env.cookieEncryptionKey],
-  })
-);
+app.use(expressSession({
+  secret: [process.env.expressSessionKey], // key
+  cookie: {
+    httpOnly: true, // 자바스크립트로 조작 불가
+    secure: false, // https를 사용할 때는 true http는 false
+  },
+  name: 'shop-app-cookie',
+  resave: false, // 요청이 왔을 때 세션에 수정 사항이 생기지 않더라도 세션을 다시 저장할지 설정하는 옵션
+  saveUninitialized: false, // 세션에 저장할 내용이 없더라고 처음부터 세션을 설정할지 결정하는 옵션
+}))
 
-// register regenerate & save after the cookieSession middleware initialization
-app.use(function (request, response, next) {
-  if (request.session && !request.session.regenerate) {
-    request.session.regenerate = (cb) => {
-      cb();
-    };
-  }
-  if (request.session && !request.session.save) {
-    request.session.save = (cb) => {
-      cb();
-    };
-  }
-  next();
-});
+// app.use(
+//   cookieSession({
+//     name: "cookie-session",
+//     keys: [process.env.cookieEncryptionKey],
+//   })
+// );
+
+// // register regenerate & save after the cookieSession middleware initialization
+// app.use(function (request, response, next) {
+//   if (request.session && !request.session.regenerate) {
+//     request.session.regenerate = (cb) => {
+//       cb();
+//     };
+//   }
+//   if (request.session && !request.session.save) {
+//     request.session.save = (cb) => {
+//       cb();
+//     };
+//   }
+//   next();
+// });
 
 // connect-flash 미들웨어
 app.use(flash());
