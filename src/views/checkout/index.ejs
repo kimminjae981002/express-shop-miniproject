@@ -58,12 +58,11 @@
 <% } %>
 
 <script>
-    const IMP = window.IMP; // 생략 가능
-    IMP.init("imp00000000a"); // 예: imp00000000a
+    IMP.init("가맹점 ID"); // 예: imp00000000a
 
     function requestPay() {
         IMP.request_pay({
-            pg: "kcp.{상점ID}",
+            pg: "PG PROVIDER.PGID", // 관리자 콘솔 결제 연동에 있음 
             pay_method: "card",
             merchant_uid: "ORD2018012321-00003011", // 주문번호
             name: "노르웨이 회전 의자",

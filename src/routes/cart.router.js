@@ -10,7 +10,7 @@ router.post('/:product', async (req, res, next) => {
     const product = await Product.findOne({ slug: productSlug});
     try {
         // 세션에 카트를 담아두고 장바구니에 새로운 상품이 담길 때
-        if (req.session.cart.length === 0) {
+        if (!req.session.cart) {
             req.session.cart = [];
             req.session.cart.push({
                 title: productSlug,
