@@ -28,6 +28,7 @@ app.use(expressSession({
   name: 'shop-app-cookie',
   resave: false, // 요청이 왔을 때 세션에 수정 사항이 생기지 않더라도 세션을 다시 저장할지 설정하는 옵션
   saveUninitialized: false, // 세션에 저장할 내용이 없더라고 처음부터 세션을 설정할지 결정하는 옵션
+  // store: 외부 저장소
 }))
 
 // app.use(
