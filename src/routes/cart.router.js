@@ -89,7 +89,8 @@ router.delete('/', async (req, res, next) => {
     let cart = req.session.cart;
     try {
         if (cart.length > 0) {
-            req.session.cart = [];
+            delete req.session.cart;
+            // req.session.cart = [];
             req.flash('success','장바구니가 비어졌습니다.')
         } else {
             req.flash('error','장바구니가 비어있습니다.')
